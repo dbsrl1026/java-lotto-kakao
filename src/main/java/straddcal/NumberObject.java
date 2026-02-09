@@ -25,4 +25,7 @@ public class NumberObject {
     }
 
 
+    public int sum(int newNumber) {
+        return number+newNumber;
+    }
 }

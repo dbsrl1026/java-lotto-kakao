@@ -28,4 +28,11 @@ public class NumberObjectTest {
         assertThatThrownBy(() -> new NumberObject("[]="))
                 .isInstanceOf(RuntimeException.class);
     }
+
+    @Test
+    @DisplayName("수 합산하기")
+    public void sumNumber(){
+        NumberObject number = new NumberObject(123);
+        assertThat(number.sum(100)).isEqualTo(223);
+    }
 }
