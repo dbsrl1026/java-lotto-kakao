@@ -3,12 +3,18 @@ package straddcal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Separator {
 
-    private String input;
+    private final String input;
+    private Character customSep = null;
 
     public Separator(String s) {
+        if(hasCustom(s)) {
+            customSep = s.charAt(2);
+            s = s.substring(5);
+        }
         this.input = s;
     }
 
@@ -21,6 +27,14 @@ public class Separator {
     }
 
     String regex(){
+        if(customSep != null){
+            return ":|,|" + customSep;
+        }
         return ":|,";
+    }
+
+    static boolean hasCustom(String s){
+        String regex = "^//.{1}\\\\n.*";
+        return Pattern.matches(regex, s);
     }
 }

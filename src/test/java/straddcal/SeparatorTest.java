@@ -15,4 +15,10 @@ class SeparatorTest {
         assertThat(sep.split().size()).isEqualTo(3);
     }
 
+    @Test
+    @DisplayName("커스텀 구분자가 있을 때")
+    public void hasCustom(){
+        Separator sep = new Separator("//a\\n1:2,3a5");
+        assertThat(sep.split().size()).isEqualTo(4);
+    }
 }
