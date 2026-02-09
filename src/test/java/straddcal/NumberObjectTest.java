@@ -33,6 +33,8 @@ public class NumberObjectTest {
     @DisplayName("수 합산하기")
     public void sumNumber(){
         NumberObject number = new NumberObject(123);
-        assertThat(number.sum(100)).isEqualTo(223);
+        NumberObject number2 = new NumberObject(100);
+        number.sum(number2);
+        assertThat(number.toString()).isEqualTo("223");
     }
 }

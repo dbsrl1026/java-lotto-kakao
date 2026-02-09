@@ -2,7 +2,7 @@ package straddcal;
 
 public class NumberObject {
 
-    private final int number;
+    private int number;
 
     public NumberObject(String number) {
         this(toInteger(number));
@@ -24,8 +24,11 @@ public class NumberObject {
         return number >= 0;
     }
 
+    public void sum(NumberObject num){
+        this.number += num.number;
+    }
 
-    public int sum(int newNumber) {
-        return number+newNumber;
+    public String toString(){
+        return Integer.toString(number);
     }
 }
