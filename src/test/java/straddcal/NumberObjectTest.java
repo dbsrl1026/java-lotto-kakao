@@ -1,0 +1,31 @@
+package straddcal;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.*;
+
+public class NumberObjectTest {
+
+    @Test
+    @DisplayName("올바른 숫자일 때")
+    public void validateNumber(){
+        assertThatCode(() -> new NumberObject("123"));
+    }
+
+
+    @Test
+    @DisplayName("음수가 들어갔을 때")
+    public void negativeNumber(){
+        assertThatThrownBy(() -> new NumberObject("-123"))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("음수 에러 발생!");
+    }
+
+    @Test
+    @DisplayName("숫자가 아닐 때")
+    public void notNumber() {
+        assertThatThrownBy(() -> new NumberObject("[]="))
+                .isInstanceOf(RuntimeException.class);
+    }
+}
