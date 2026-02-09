@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SeparatorTest {
@@ -21,4 +22,12 @@ class SeparatorTest {
         Separator sep = new Separator("//a\\n1:2,3a5");
         assertThat(sep.split().size()).isEqualTo(4);
     }
+
+    @Test
+    @DisplayName("잘못된 구분자가 있을 때")
+    public void errorSep(){
+        Separator sep = new Separator("1:2,3a5");
+        assertThatThrownBy(()->sep.split()).isInstanceOf(RuntimeException.class);
+    }
+
 }
