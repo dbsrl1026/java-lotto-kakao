@@ -3,11 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
+import static org.assertj.core.api.Assertions.*;
 
 
 class LottoNumberTest {
@@ -24,6 +20,14 @@ class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(64))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("로또 번호는 1-45 사이 값이어야 합니다");
+    }
+
+    @Test
+    @DisplayName("로또 번호 일치 여부 검사 - 일치할때")
+    public void isEqual(){
+        LottoNumber number1 = new LottoNumber(1);
+        LottoNumber number2 = new LottoNumber(1);
+        assertThat(number1.equals(number2)).isTrue();
     }
 
 }

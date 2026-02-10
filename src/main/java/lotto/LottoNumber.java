@@ -11,4 +11,7 @@ public class LottoNumber {
         this.num = num;
     }
 
+    public boolean equals(LottoNumber lottoNumber) {
+        return this.num == lottoNumber.num;
+    }
 }
