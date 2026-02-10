@@ -3,9 +3,12 @@ package lotto;
 public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int num;
+    public static final int START_NUMBER=1;
+    public static final int END_NUMBER=45;
+
 
     public LottoNumber(int num) {
-        if (num < 1 || num >45) {
+        if (num < START_NUMBER || num > END_NUMBER) {
             throw new RuntimeException("로또 번호는 1-45 사이 값이어야 합니다");
         }
         this.num = num;
