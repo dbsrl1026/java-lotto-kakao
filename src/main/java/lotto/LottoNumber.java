@@ -1,6 +1,6 @@
 package lotto;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     private final int num;
 
@@ -22,5 +22,10 @@ public class LottoNumber {
     @Override
     public int hashCode() {
         return Integer.hashCode(num);
+    }
+
+    @Override
+    public int compareTo(LottoNumber other) {
+        return Integer.compare(this.num, other.num);
     }
 }
