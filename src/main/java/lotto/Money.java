@@ -20,6 +20,10 @@ public class Money {
         return  (double) this.value / m2.value;
     }
 
+    public Money multiple(int count){
+        return new Money(value*count);
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

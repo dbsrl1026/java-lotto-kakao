@@ -13,13 +13,13 @@ public enum WinningRank {
     FIRST(2_000_000_000, 1, 6,0)
     ;
 
-    private int winningPrice;
-    private int rank;
-    private int matchCount;
-    private int bounceCount;
+    public final Money winningPrice;
+    public final int rank;
+    private final int matchCount;
+    private final int bounceCount;
 
     WinningRank(int winningPrice, int rank, int matchCount, int bounceCount) {
-        this.winningPrice = winningPrice;
+        this.winningPrice = new Money(winningPrice);
         this.rank = rank;
         this.matchCount = matchCount;
         this.bounceCount = bounceCount;
