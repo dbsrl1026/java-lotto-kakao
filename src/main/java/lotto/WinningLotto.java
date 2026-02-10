@@ -1,16 +1,14 @@
 package lotto;
 
-import java.util.List;
-
 public class WinningLotto {
-    private final LottoTicket lottoTicket;
+    private final LottoTicket winningTicket;
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        if(!validate(lottoTicket, bonusNumber)) {
+    public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
+        if(!validate(winningTicket, bonusNumber)) {
             throw new RuntimeException("보너스 숫자 겹침!");
         }
-        this.lottoTicket = lottoTicket;
+        this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
     }
 
@@ -19,4 +17,9 @@ public class WinningLotto {
     }
 
 
+    public WinningRank checkRank(LottoTicket lottoTicket) {
+        int matchCount = winningTicket.duplicateNumber(lottoTicket);
+        int bounceCount = lottoTicket.duplicateNumber(bonusNumber) ? 1:0;
+        return WinningRank.getRank(matchCount, bounceCount);
+    }
 }

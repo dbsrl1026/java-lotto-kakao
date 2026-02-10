@@ -38,4 +38,8 @@ public class LottoTicket {
     public boolean duplicateNumber(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
+
+    public int duplicateNumber(LottoTicket ticket2) {
+        return (int)lottoNumbers.stream().filter(num -> ticket2.duplicateNumber(num)).count();
+    }
 }
