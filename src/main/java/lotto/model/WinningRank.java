@@ -1,7 +1,9 @@
-package lotto;
+package lotto.model;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum WinningRank {
 
@@ -44,5 +46,12 @@ public enum WinningRank {
         }
         sb.append(" ("+winningPrice.toString()+")");
         return sb.toString();
+    }
+
+    public static List<WinningRank> getValidRanks() {
+        return Arrays.stream(values())
+                .filter(rank -> rank.matchCount > 0)
+                .sorted(Comparator.comparingInt(r -> -r.rank))
+                .collect(Collectors.toList());
     }
 }

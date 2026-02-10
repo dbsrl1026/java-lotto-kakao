@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -41,5 +41,10 @@ public class LottoTicket {
 
     public int duplicateNumber(LottoTicket ticket2) {
         return (int)lottoNumbers.stream().filter(num -> ticket2.duplicateNumber(num)).count();
+    }
+
+    @Override
+    public String toString() {
+        return lottoNumbers.toString();
     }
 }

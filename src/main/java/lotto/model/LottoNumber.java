@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
@@ -30,5 +30,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int compareTo(LottoNumber other) {
         return Integer.compare(this.num, other.num);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(num);
     }
 }
