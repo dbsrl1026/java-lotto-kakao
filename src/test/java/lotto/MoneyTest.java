@@ -3,8 +3,7 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 
 class MoneyTest {
@@ -24,4 +23,11 @@ class MoneyTest {
                 .hasMessage("돈은 항상 0원 이상이어야 합니다.");
     }
 
+    @Test
+    @DisplayName("합연산")
+    public void sum(){
+        Money money1 = new Money(1000);
+        Money money2 = new Money(2000);
+        assertThat(money1.sum(money2)).isEqualTo(new Money(3000));
+    }
 }

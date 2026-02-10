@@ -11,7 +11,16 @@ public class LottoNumber {
         this.num = num;
     }
 
-    public boolean equals(LottoNumber lottoNumber) {
-        return this.num == lottoNumber.num;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof LottoNumber)) return false;
+        LottoNumber number = (LottoNumber) obj;
+        return this.num == number.num;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(num);
     }
 }

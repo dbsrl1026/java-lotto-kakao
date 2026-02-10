@@ -27,7 +27,7 @@ class LottoNumberTest {
     public void isEqual(){
         LottoNumber number1 = new LottoNumber(1);
         LottoNumber number2 = new LottoNumber(1);
-        assertThat(number1.equals(number2)).isTrue();
+        assertThat(number1).isEqualTo(number2);
     }
 
 }
