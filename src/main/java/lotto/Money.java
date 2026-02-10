@@ -37,4 +37,8 @@ public class Money {
         return Integer.hashCode(value);
     }
 
+    @Override
+    public String toString() {
+        return value+"원";
+    }
 }

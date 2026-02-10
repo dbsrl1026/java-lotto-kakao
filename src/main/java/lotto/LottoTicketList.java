@@ -17,4 +17,10 @@ public class LottoTicketList {
     public void insertTicket(LottoTicket lottoTicket) {
         lottoTickets.add(lottoTicket);
     }
+
+    public WinningInfo cumulativeReport(WinningLotto winningLotto){
+        WinningInfo winningInfo = new WinningInfo();
+        lottoTickets.forEach(ticket -> winningInfo.addResult(winningLotto.checkRank(ticket)));
+        return winningInfo;
+    }
 }
