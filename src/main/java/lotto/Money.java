@@ -3,14 +3,13 @@ package lotto;
 public class Money {
 
     private final int value;
+
     public Money(int money) {
-        if(!validateMoney(money)) throw new RuntimeException("돈은 항상 0원 이상이어야 합니다.");
         this.value = money;
     }
 
-
-    public static boolean validateMoney(int money) {
-        return money >= 0;
+    public boolean isDebt() {
+        return value < 0;
     }
 
     public Money sum(Money m2) {
