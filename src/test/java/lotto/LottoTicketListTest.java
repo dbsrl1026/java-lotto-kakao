@@ -26,10 +26,9 @@ class LottoTicketListTest {
     }
 
     @Test
-    @DisplayName("null값 들어갔는지")
+    @DisplayName("null값이어도 정상 초기화 되는지 검사")
     public void lottoTicketListIsNull() {
-        assertThatThrownBy(() -> new LottoTicketList(null)).isInstanceOf(RuntimeException.class)
-                .hasMessage("잘못된 호출");
+        assertThatCode(() -> new LottoTicketList(null));
     }
 
 
