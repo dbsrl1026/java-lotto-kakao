@@ -1,9 +1,14 @@
 package lotto;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
+
+    public LottoTicket(Integer... numbers) {
+        this(toLottoNumberSet(numbers));
+    }
 
     public LottoTicket(List<LottoNumber> lottoNumbers) {
         this(new TreeSet<>(lottoNumbers));
@@ -16,7 +21,21 @@ public class LottoTicket {
         this.lottoNumbers = lottoNumbers;
     }
 
+    private static Set<LottoNumber> toLottoNumberSet(Integer... numbers) {
+        if (numbers == null) {
+            throw new IllegalArgumentException("번호는 null일 수 없습니다.");
+        }
+
+        return Arrays.stream(numbers)
+                .map(LottoNumber::new) // LottoNumber에 int를 받는 생성자가 있다고 가정
+                .collect(Collectors.toCollection(TreeSet::new));
+    }
+
     static boolean validate(Set<LottoNumber> lottoNumbers){
         return lottoNumbers.size() == 6;
+    }
+
+    public boolean duplicateNumber(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 }

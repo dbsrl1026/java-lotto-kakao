@@ -17,11 +17,12 @@ class LottoTicketListTest {
     @DisplayName("제대로 생성돼는지")
     public void createLottoTicketList() {
         assertThatCode(() -> new LottoTicketList(List.of(
-                createLottoTicket(List.of(1,2,3,4,5,6)),
-                createLottoTicket(List.of(1,2,3,4,5,6)),
-                createLottoTicket(List.of(1,2,3,4,5,6)),
-                createLottoTicket(List.of(1,2,3,4,5,6)),
-                createLottoTicket(List.of(1,2,3,4,5,6))
+                new LottoTicket(1,2,3,4,5,6),
+                new LottoTicket(1,2,3,4,5,6),
+                new LottoTicket(1,2,3,4,5,6),
+                new LottoTicket(1,2,3,4,5,6),
+                new LottoTicket(1,2,3,4,5,6),
+                new LottoTicket(1,2,3,4,5,6)
         )));
     }
 
@@ -31,18 +32,5 @@ class LottoTicketListTest {
         assertThatCode(() -> new LottoTicketList(null));
     }
 
-
-
-    public LottoTicket createLottoTicket(List<Integer> nums) {
-        List<LottoNumber> lottoNumbers = List.of(
-                new LottoNumber(nums.get(0)),
-                new LottoNumber(nums.get(1)),
-                new LottoNumber(nums.get(2)),
-                new LottoNumber(nums.get(3)),
-                new LottoNumber(nums.get(4)),
-                new LottoNumber(nums.get(5))
-        );
-        return new LottoTicket(lottoNumbers);
-    }
 
 }
