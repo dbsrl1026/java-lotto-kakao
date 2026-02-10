@@ -7,6 +7,7 @@ public class Wallet {
     public Wallet(Money balance) {
         if(balance.isDebt()) throw new RuntimeException("잔액은 항상 0원 이상이어야 합니다.");
         this.balance = balance;
+        this.receipt = new Money(0);
     }
 
     public void change(Money money) {
@@ -23,7 +24,13 @@ public class Wallet {
         return !newBalance.isDebt();
     }
 
+    public Double Settlement(Money money) {
+        Double rateOfReturn = -1 * money.division(receipt);
+        receipt = new Money(0);
+        balance = balance.sum(money);
+        return rateOfReturn;
 
+    }
 
 
 }

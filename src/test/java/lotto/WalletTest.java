@@ -42,4 +42,13 @@ class WalletTest {
         Wallet wallet = new Wallet(new Money(1000));
         assertThat(wallet.checkBalance(new Money(-3000))).isFalse();
     }
+
+    @Test
+    @DisplayName("수익률 정상 반환")
+    public void rateOfReturn() {
+        Wallet wallet = new Wallet(new Money(10500));
+        wallet.change(new Money(-10000));
+        assertThat(wallet.Settlement(new Money(100000))).isEqualTo(10.0);
+
+    }
 }
