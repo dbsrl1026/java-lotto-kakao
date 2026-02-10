@@ -13,8 +13,7 @@ public class WinningInfo {
                 .map(rank -> info.put(rank, 0));
     }
 
-    public void compare(LottoTicket lottoTicket, WinningLotto winningLotto) {
-        WinningRank rank = winningLotto.checkRank(lottoTicket);
+    public void addResult(WinningRank rank) {
         info.put(rank, info.getOrDefault(rank,0) + 1);
     }
 
