@@ -15,9 +15,17 @@ class LottoNumberTest {
     }
 
     @Test
-    @DisplayName("올바르지 않은 번호일 때")
-    public void negativeMoney(){
-        assertThatThrownBy(() -> new LottoNumber(64))
+    @DisplayName("올바르지 않은 번호일 때 : 46")
+    public void negativeMoney46(){
+        assertThatThrownBy(() -> new LottoNumber(46))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("로또 번호는 1-45 사이 값이어야 합니다");
+    }
+
+    @Test
+    @DisplayName("올바르지 않은 번호일 때 : 0")
+    public void negativeMoney0(){
+        assertThatThrownBy(() -> new LottoNumber(0))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("로또 번호는 1-45 사이 값이어야 합니다");
     }
