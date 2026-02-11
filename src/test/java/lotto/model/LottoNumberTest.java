@@ -38,4 +38,12 @@ class LottoNumberTest {
         assertThat(number1).isEqualTo(number2);
     }
 
+    @Test
+    @DisplayName("로또 번호 일치 여부 검사 - 일치하지 않을 때")
+    public void isNotEqual(){
+        LottoNumber number1 = new LottoNumber(1);
+        LottoNumber number2 = new LottoNumber(2);
+        assertThat(number1).isNotEqualTo(number2);
+    }
+
 }
