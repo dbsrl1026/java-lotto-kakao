@@ -17,7 +17,6 @@ public class WinningInfo {
         info.put(rank, info.getOrDefault(rank,0) + 1);
     }
 
-
     public Money getTotalPrice() {
         Money total = new Money(0);
         for (Map.Entry<WinningRank, Integer> entry : info.entrySet()) {
