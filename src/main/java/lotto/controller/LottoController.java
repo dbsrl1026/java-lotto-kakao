@@ -27,7 +27,7 @@ public class LottoController {
         LottoNumber bonusNumber = inputView.inputBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
-        WinningInfo winningInfo = ticketList.cumulativeReport(winningLotto);
+        WinningInfo winningInfo = ticketList.winningResult(winningLotto);
         outputView.printStatistics(winningInfo);
 
         Money totalPrize = winningInfo.getTotalPrice();
