@@ -5,17 +5,16 @@ public class WinningLotto {
     private final LottoNumber bonusNumber;
 
     public WinningLotto(LottoTicket winningTicket, LottoNumber bonusNumber) {
-        if(!validate(winningTicket, bonusNumber)) {
-            throw new RuntimeException("보너스 숫자 겹침!");
-        }
+        validate(winningTicket, bonusNumber);
         this.winningTicket = winningTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    private boolean validate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        return !lottoTicket.duplicateNumber(bonusNumber);
+    private void validate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
+        if (lottoTicket.duplicateNumber(bonusNumber)) {
+            throw new RuntimeException("보너스 숫자 겹침!");
+        }
     }
-
 
     public WinningRank checkRank(LottoTicket lottoTicket) {
         int matchCount = winningTicket.duplicateNumber(lottoTicket);
