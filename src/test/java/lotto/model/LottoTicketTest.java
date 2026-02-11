@@ -23,7 +23,7 @@ class LottoTicketTest {
 
     @Test
     @DisplayName("로또 번호에 중복이 있을 때")
-    public void duplicateNumber(){
+    public void hasDuplicateNumber(){
         assertThatThrownBy(() -> new LottoTicket(1,2,3,4,3,6)).isInstanceOf(RuntimeException.class)
                 .hasMessage("로또 티켓에는 6개의 번호가 필요합니다.");
     }

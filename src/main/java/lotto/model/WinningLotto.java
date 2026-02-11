@@ -11,14 +11,14 @@ public class WinningLotto {
     }
 
     private void validate(LottoTicket lottoTicket, LottoNumber bonusNumber) {
-        if (lottoTicket.duplicateNumber(bonusNumber)) {
+        if (lottoTicket.hasDuplicateNumber(bonusNumber)) {
             throw new RuntimeException("보너스 숫자 겹침!");
         }
     }
 
     public WinningRank checkRank(LottoTicket lottoTicket) {
-        int matchCount = winningTicket.duplicateNumber(lottoTicket);
-        int bounceCount = lottoTicket.duplicateNumber(bonusNumber) ? 1:0;
+        int matchCount = winningTicket.hasDuplicateNumber(lottoTicket);
+        int bounceCount = lottoTicket.hasDuplicateNumber(bonusNumber) ? 1:0;
         return WinningRank.getRank(matchCount, bounceCount);
     }
 }
