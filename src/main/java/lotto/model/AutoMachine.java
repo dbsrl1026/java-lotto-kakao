@@ -6,9 +6,8 @@ import java.util.List;
 
 public class AutoMachine {
 
-
     private final List<LottoNumber> numberList;
-    public static final Money LOTTO_PRICE = new Money(-1000);
+    public static final Money LOTTO_PRICE = new Money(1000);
 
     public AutoMachine() {
         numberList = new ArrayList<>();
@@ -18,7 +17,7 @@ public class AutoMachine {
     }
 
     public LottoTicket issue(Wallet wallet) {
-        wallet.change(LOTTO_PRICE);
+        wallet.pay(LOTTO_PRICE);
         Collections.shuffle(numberList);
         return new LottoTicket(numberList.subList(0,LottoTicket.TICKET_SIZE));
     }
