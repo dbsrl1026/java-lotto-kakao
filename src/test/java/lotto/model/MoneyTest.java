@@ -46,4 +46,14 @@ class MoneyTest {
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("잔액이 부족합니다.");
     }
+
+    @Test
+    @DisplayName("나눗셈 0으로 나눌 때 예외 발생")
+    public void divisionByZero() {
+        Money money = new Money(1000);
+        Money zero = new Money(0);
+        assertThatThrownBy(() -> money.division(zero))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessage("0으로 나눌 수 없습니다.");
+    }
 }
