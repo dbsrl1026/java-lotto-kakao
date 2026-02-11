@@ -20,7 +20,7 @@ public class AutoMachine {
     public LottoTicket issue(Wallet wallet) {
         wallet.change(LOTTO_PRICE);
         Collections.shuffle(numberList);
-        return new LottoTicket(numberList.subList(0,6));
+        return new LottoTicket(numberList.subList(0,LottoTicket.TICKET_SIZE));
     }
 
     public LottoTicketList allIn(Wallet wallet) {

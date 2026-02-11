@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     private final Set<LottoNumber> lottoNumbers;
+    public static final int TICKET_SIZE = 6;
 
     public LottoTicket(Integer... numbers) {
         this(toLottoNumberSet(numbers));
@@ -32,7 +33,7 @@ public class LottoTicket {
     }
 
     static boolean validate(Set<LottoNumber> lottoNumbers){
-        return lottoNumbers.size() == 6;
+        return lottoNumbers.size() == TICKET_SIZE;
     }
 
     public boolean duplicateNumber(LottoNumber lottoNumber) {
