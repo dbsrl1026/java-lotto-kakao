@@ -26,7 +26,7 @@ public enum WinningRank {
         this.bounceCount = bounceCount;
     }
 
-    public boolean isSatisfied(int matchCount, int bounceCount) {
+    private boolean isSatisfied(int matchCount, int bounceCount) {
         return matchCount >= this.matchCount
                 && bounceCount >= this.bounceCount;
     }
