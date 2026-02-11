@@ -16,9 +16,7 @@ public class LottoTicket {
     }
 
     public LottoTicket(Set<LottoNumber> lottoNumbers){
-        if(!validate(lottoNumbers)){
-            throw new RuntimeException("로또 티켓에는 6개의 번호가 필요합니다.");
-        }
+        validateSize(lottoNumbers);
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -32,8 +30,10 @@ public class LottoTicket {
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    static boolean validate(Set<LottoNumber> lottoNumbers){
-        return lottoNumbers.size() == TICKET_SIZE;
+    static void validateSize(Set<LottoNumber> lottoNumbers){
+        if (lottoNumbers.size() != TICKET_SIZE) {
+            throw new RuntimeException("로또 티켓에는 " + TICKET_SIZE + "개의 번호가 필요합니다.");
+        }
     }
 
     public boolean duplicateNumber(LottoNumber lottoNumber) {
