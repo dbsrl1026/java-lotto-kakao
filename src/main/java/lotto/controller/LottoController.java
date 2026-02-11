@@ -18,7 +18,7 @@ public class LottoController {
         Wallet wallet = new Wallet(purchaseAmount);
 
         AutoMachine autoMachine = new AutoMachine();
-        LottoTicketList ticketList = autoMachine.allIn(wallet);
+        LottoTickets ticketList = autoMachine.allIn(wallet);
 
         outputView.printPurchaseCount(ticketList.size());
         outputView.printTickets(ticketList);

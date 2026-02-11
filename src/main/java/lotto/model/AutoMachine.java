@@ -22,9 +22,9 @@ public class AutoMachine {
         return new LottoTicket(numberList.subList(0,LottoTicket.TICKET_SIZE));
     }
 
-    public LottoTicketList allIn(Wallet wallet) {
+    public LottoTickets allIn(Wallet wallet) {
 
-        LottoTicketList lottoTicketList = new LottoTicketList(new ArrayList<>());
+        LottoTickets lottoTicketList = new LottoTickets(new ArrayList<>());
         while (wallet.checkBalance(LOTTO_PRICE)) {
             lottoTicketList.insertTicket(this.issue(wallet));
         }

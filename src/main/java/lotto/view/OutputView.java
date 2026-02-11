@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.model.LottoTicketList;
+import lotto.model.LottoTickets;
 import lotto.model.WinningInfo;
 
 public class OutputView {
@@ -9,7 +9,7 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public void printTickets(LottoTicketList ticketList) {
+    public void printTickets(LottoTickets ticketList) {
         System.out.println(ticketList);
     }
 

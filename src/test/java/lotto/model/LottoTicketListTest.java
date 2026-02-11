@@ -14,7 +14,7 @@ class LottoTicketListTest {
     @Test
     @DisplayName("제대로 생성돼는지")
     public void createLottoTicketList() {
-        assertThatCode(() -> new LottoTicketList(List.of(
+        assertThatCode(() -> new LottoTickets(List.of(
                 new LottoTicket(1,2,3,4,5,6),
                 new LottoTicket(1,2,3,4,5,6),
                 new LottoTicket(1,2,3,4,5,6),
@@ -27,7 +27,7 @@ class LottoTicketListTest {
     @Test
     @DisplayName("null값이어도 정상 초기화 되는지 검사")
     public void lottoTicketListIsNull() {
-        assertThatCode(() -> new LottoTicketList(null));
+        assertThatCode(() -> new LottoTickets(null));
     }
 
 
