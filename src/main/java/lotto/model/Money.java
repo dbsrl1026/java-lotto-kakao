@@ -1,9 +1,9 @@
 package lotto.model;
 
 public class Money {
-    private final int value;
+    private final long value;
 
-    public Money(int money) {
+    public Money(long money) {
         if (money < 0) {
             throw new RuntimeException("금액은 0원 이상이어야 합니다.");
         }
@@ -29,10 +29,10 @@ public class Money {
     }
 
     public Money multiple(int count){
-        return new Money(value*count);
+        return new Money(value * count);
     }
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 
@@ -50,7 +50,11 @@ public class Money {
 
     @Override
     public int hashCode() {
-        return Integer.hashCode(value);
+        return Long.hashCode(value);
     }
 
+    @Override
+    public String toString() {
+        return "Money{value=" + value + "}";
+    }
 }
