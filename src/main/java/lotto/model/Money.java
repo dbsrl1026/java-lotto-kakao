@@ -10,22 +10,22 @@ public class Money {
         this.value = money;
     }
 
-    public Money sum(Money m2) {
-        return new Money(this.value + m2.value);
+    public Money sum(Money other) {
+        return new Money(this.value + other.value);
     }
 
-    public Money minus(Money m2) {
-        if (this.value < m2.value) {
+    public Money minus(Money other) {
+        if (this.value < other.value) {
             throw new RuntimeException("잔액이 부족합니다.");
         }
-        return new Money(this.value - m2.value);
+        return new Money(this.value - other.value);
     }
 
-    public Double division(Money m2) {
-        if (m2.value == 0) {
+    public Double division(Money other) {
+        if (other.value == 0) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
-        return  (double) this.value / m2.value;
+        return  (double) this.value / other.value;
     }
 
     public Money multiple(int count){
