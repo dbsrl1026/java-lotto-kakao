@@ -16,14 +16,14 @@ public class LottoController {
     public void run() {
         try {
             Wallet wallet = initializeWallet();
-            LottoTickets manualTickets = purchaseManualTickets(wallet);
-            int manualCount = manualTickets.size();
-            LottoTickets autoTickets = purchaseAutoTickets(wallet);
+            LottoGame game = new LottoGame();
 
-            LottoTickets allTickets = mergeTickets(manualTickets, autoTickets);
-            printPurchaseResult(manualCount, autoTickets.size(), allTickets);
+            int manualCount = purchaseManual(wallet, game);
+            LottoTickets autoTickets = game.buyAuto(wallet);
 
-            processWinning(allTickets, wallet);
+            printPurchaseResult(manualCount, autoTickets.size(), game.getAllTickets());
+
+            processWinning(game, wallet);
         } catch (RuntimeException e) {
             System.out.println("[ERROR] " + e.getMessage());
         }
@@ -34,22 +34,14 @@ public class LottoController {
         return new Wallet(purchaseAmount);
     }
 
-    private LottoTickets purchaseManualTickets(Wallet wallet) {
+    private int purchaseManual(Wallet wallet, LottoGame game) {
         int manualCount = inputView.inputManualTicketCount();
-        Money manualPrice = AutoMachine.LOTTO_PRICE.multiple(manualCount);
-        wallet.pay(manualPrice);
+        
+        game.validateManualPurchaseCapability(wallet, manualCount);
 
-        return inputView.inputManualTickets(manualCount);
-    }
-
-    private LottoTickets purchaseAutoTickets(Wallet wallet) {
-        AutoMachine autoMachine = new AutoMachine();
-        return autoMachine.allIn(wallet);
-    }
-
-    private LottoTickets mergeTickets(LottoTickets manual, LottoTickets auto) {
-        manual.addAll(auto);
-        return manual;
+        LottoTickets manualTickets = inputView.inputManualTickets(manualCount);
+        game.buyManual(wallet, manualTickets);
+        return manualCount;
     }
 
     private void printPurchaseResult(int manualCount, int autoCount, LottoTickets tickets) {
@@ -57,9 +49,9 @@ public class LottoController {
         outputView.printTickets(tickets);
     }
 
-    private void processWinning(LottoTickets tickets, Wallet wallet) {
+    private void processWinning(LottoGame game, Wallet wallet) {
         WinningLotto winningLotto = createWinningLotto();
-        WinningInfo winningInfo = tickets.winningResult(winningLotto);
+        WinningInfo winningInfo = game.calculateResult(winningLotto);
         outputView.printStatistics(winningInfo);
 
         Money totalPrize = winningInfo.getTotalPrice();
