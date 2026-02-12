@@ -30,7 +30,7 @@ public class LottoTicket {
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
-    static void validateSize(Set<LottoNumber> lottoNumbers){
+    private static void validateSize(Set<LottoNumber> lottoNumbers){
         if (lottoNumbers.size() != TICKET_SIZE) {
             throw new RuntimeException("로또 티켓에는 " + TICKET_SIZE + "개의 번호가 필요합니다.");
         }
