@@ -1,0 +1,37 @@
+package lotto.controller;
+
+import lotto.model.*;
+import lotto.view.InputView;
+import lotto.view.OutputView;
+
+public class LottoController {
+    private final InputView inputView;
+    private final OutputView outputView;
+
+    public LottoController() {
+        this.inputView = new InputView();
+        this.outputView = new OutputView();
+    }
+
+    public void run() {
+        Money purchaseAmount = inputView.inputMoney();
+        Wallet wallet = new Wallet(purchaseAmount);
+
+        AutoMachine autoMachine = new AutoMachine();
+        LottoTickets ticketList = autoMachine.allIn(wallet);
+
+        outputView.printPurchaseCount(ticketList.size());
+        outputView.printTickets(ticketList);
+
+        LottoTicket winningNumbers = inputView.inputWinningNumbers();
+        LottoNumber bonusNumber = inputView.inputBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+
+        WinningInfo winningInfo = ticketList.winningResult(winningLotto);
+        outputView.printStatistics(winningInfo);
+
+        Money totalPrize = winningInfo.getTotalPrice();
+        double rateOfReturn = wallet.Settlement(totalPrize);
+        outputView.printRateOfReturn(rateOfReturn);
+    }
+}
