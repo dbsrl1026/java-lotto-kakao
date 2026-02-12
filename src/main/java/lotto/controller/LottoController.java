@@ -14,24 +14,62 @@ public class LottoController {
     }
 
     public void run() {
+        try {
+            Wallet wallet = initializeWallet();
+            LottoTickets manualTickets = purchaseManualTickets(wallet);
+            int manualCount = manualTickets.size();
+            LottoTickets autoTickets = purchaseAutoTickets(wallet);
+
+            LottoTickets allTickets = mergeTickets(manualTickets, autoTickets);
+            printPurchaseResult(manualCount, autoTickets.size(), allTickets);
+
+            processWinning(allTickets, wallet);
+        } catch (RuntimeException e) {
+            System.out.println("[ERROR] " + e.getMessage());
+        }
+    }
+
+    private Wallet initializeWallet() {
         Money purchaseAmount = inputView.inputMoney();
-        Wallet wallet = new Wallet(purchaseAmount);
+        return new Wallet(purchaseAmount);
+    }
 
+    private LottoTickets purchaseManualTickets(Wallet wallet) {
+        int manualCount = inputView.inputManualTicketCount();
+        Money manualPrice = AutoMachine.LOTTO_PRICE.multiple(manualCount);
+        wallet.pay(manualPrice);
+
+        return inputView.inputManualTickets(manualCount);
+    }
+
+    private LottoTickets purchaseAutoTickets(Wallet wallet) {
         AutoMachine autoMachine = new AutoMachine();
-        LottoTickets ticketList = autoMachine.allIn(wallet);
+        return autoMachine.allIn(wallet);
+    }
 
-        outputView.printPurchaseCount(ticketList.size());
-        outputView.printTickets(ticketList);
+    private LottoTickets mergeTickets(LottoTickets manual, LottoTickets auto) {
+        manual.addAll(auto);
+        return manual;
+    }
 
-        LottoTicket winningNumbers = inputView.inputWinningNumbers();
-        LottoNumber bonusNumber = inputView.inputBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
+    private void printPurchaseResult(int manualCount, int autoCount, LottoTickets tickets) {
+        outputView.printPurchaseCount(manualCount, autoCount);
+        outputView.printTickets(tickets);
+    }
 
-        WinningInfo winningInfo = ticketList.winningResult(winningLotto);
+    private void processWinning(LottoTickets tickets, Wallet wallet) {
+        WinningLotto winningLotto = createWinningLotto();
+        WinningInfo winningInfo = tickets.winningResult(winningLotto);
         outputView.printStatistics(winningInfo);
 
         Money totalPrize = winningInfo.getTotalPrice();
         double rateOfReturn = wallet.Settlement(totalPrize);
         outputView.printRateOfReturn(rateOfReturn);
+    }
+
+    private WinningLotto createWinningLotto() {
+        LottoTicket winningNumbers = inputView.inputWinningNumbers();
+        LottoNumber bonusNumber = inputView.inputBonusNumber();
+        return new WinningLotto(winningNumbers, bonusNumber);
     }
 }
