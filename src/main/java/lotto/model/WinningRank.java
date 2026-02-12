@@ -35,7 +35,7 @@ public enum WinningRank {
         return Arrays.stream(values())
                 .filter(rank -> rank.isSatisfied(matchCount, bounceCount))
                 .min(Comparator.comparingInt(r -> r.rank))
-                .orElse(NONE);
+                .orElseThrow(() -> new RuntimeException("유효하지 않은 당첨 개수입니다: " + matchCount));
     }
 
     public int getMatchCount() {

@@ -34,4 +34,12 @@ class WinningRankTest {
         WinningRank rank = WinningRank.getRank(2,1);
         assertThat(rank).isEqualTo(WinningRank.NONE);
     }
+
+    @Test
+    @DisplayName("유효하지 않은 당첨 개수")
+    public void invalidMatchCount() {
+        assertThatThrownBy(() -> WinningRank.getRank(10, 0))
+                .isInstanceOf(RuntimeException.class)
+                .hasMessage("유효하지 않은 당첨 개수입니다: 10");
+    }
 }
