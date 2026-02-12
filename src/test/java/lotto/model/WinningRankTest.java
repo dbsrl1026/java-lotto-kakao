@@ -34,18 +34,4 @@ class WinningRankTest {
         WinningRank rank = WinningRank.getRank(2,1);
         assertThat(rank).isEqualTo(WinningRank.NONE);
     }
-
-    @Test
-    @DisplayName("결과 출력")
-    void getInfoString() {
-        WinningRank rank = WinningRank.THIRD;
-        assertThat(rank.getInfoString()).isEqualTo("5개 일치 (1500000원)");
-    }
-
-    @Test
-    @DisplayName("결과 출력(보너스 공 존재)")
-    void getInfoStringWithBounce() {
-        WinningRank rank = WinningRank.SECOND;
-        assertThat(rank.getInfoString()).isEqualTo("5개 일치, 보너스 볼 일치 (30000000원)");
-    }
 }

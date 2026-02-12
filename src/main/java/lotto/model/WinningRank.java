@@ -38,13 +38,12 @@ public enum WinningRank {
                 .orElse(NONE);
     }
 
-    public String getInfoString() {
-        StringBuilder sb = new StringBuilder(matchCount + "개 일치");
-        if (bounceCount != 0) {
-            sb.append(", 보너스 볼 일치");
-        }
-        sb.append(" (" + winningPrice.getValue() + "원)");
-        return sb.toString();
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public int getBounceCount() {
+        return bounceCount;
     }
 
     public static List<WinningRank> getValidRanks() {
