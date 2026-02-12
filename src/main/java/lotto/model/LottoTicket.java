@@ -36,12 +36,12 @@ public class LottoTicket {
         }
     }
 
-    public boolean hasDuplicateNumber(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public int hasDuplicateNumber(LottoTicket ticket2) {
-        return (int)lottoNumbers.stream().filter(num -> ticket2.hasDuplicateNumber(num)).count();
+    public int countMatchingNumbers(LottoTicket ticket2) {
+        return (int)lottoNumbers.stream().filter(num -> ticket2.contains(num)).count();
     }
 
     @Override
