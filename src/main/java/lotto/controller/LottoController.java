@@ -16,14 +16,16 @@ public class LottoController {
     public void run() {
         try {
             Wallet wallet = initializeWallet();
-            LottoGame game = new LottoGame();
+            LottoSeller seller = new LottoSeller();
+            MyLotto myLotto = new MyLotto();
 
-            int manualCount = purchaseManual(wallet, game);
-            LottoTickets autoTickets = game.buyAuto(wallet);
+            int manualCount = purchaseManual(wallet, seller, myLotto);
+            LottoTickets autoTickets = seller.sellAuto(wallet);
+            myLotto.addTickets(autoTickets);
 
-            printPurchaseResult(manualCount, autoTickets.size(), game.getAllTickets());
+            printPurchaseResult(manualCount, autoTickets.size(), myLotto.getAllTickets());
 
-            processWinning(game, wallet);
+            processWinning(myLotto, wallet);
         } catch (RuntimeException e) {
             System.out.println("[ERROR] " + e.getMessage());
         }
@@ -34,13 +36,14 @@ public class LottoController {
         return new Wallet(purchaseAmount);
     }
 
-    private int purchaseManual(Wallet wallet, LottoGame game) {
+    private int purchaseManual(Wallet wallet, LottoSeller seller, MyLotto myLotto) {
         int manualCount = inputView.inputManualTicketCount();
-        
-        game.validateManualPurchaseCapability(wallet, manualCount);
+        seller.checkPurchasability(wallet, manualCount);
 
         LottoTickets manualTickets = inputView.inputManualTickets(manualCount);
-        game.buyManual(wallet, manualTickets);
+        seller.sellManual(wallet, manualTickets);
+        myLotto.addTickets(manualTickets);
+        
         return manualCount;
     }
 
@@ -49,9 +52,9 @@ public class LottoController {
         outputView.printTickets(tickets);
     }
 
-    private void processWinning(LottoGame game, Wallet wallet) {
+    private void processWinning(MyLotto myLotto, Wallet wallet) {
         WinningLotto winningLotto = createWinningLotto();
-        WinningInfo winningInfo = game.calculateResult(winningLotto);
+        WinningInfo winningInfo = myLotto.calculateResult(winningLotto);
         outputView.printStatistics(winningInfo);
 
         Money totalPrize = winningInfo.getTotalPrice();
