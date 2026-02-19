@@ -59,7 +59,7 @@ public class InputView {
         System.out.println("보너스 볼을 입력해 주세요.");
         try {
             int number = Integer.parseInt(scanner.nextLine().trim());
-            return new LottoNumber(number);
+            return LottoNumber.of(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자만 입력해 주세요.");
         }
@@ -70,7 +70,7 @@ public class InputView {
             return Arrays.stream(input.split(","))
                     .map(String::trim)
                     .map(Integer::parseInt)
-                    .map(LottoNumber::new)
+                    .map(LottoNumber::of)
                     .collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("올바른 숫자 형식이 아닙니다.");

@@ -16,7 +16,7 @@ class WinningLottoTest {
     @Test
     @DisplayName("유효한 당첨로또 생성")
     public void createWinningLotto() {
-        LottoNumber bonusNum = new LottoNumber(33); // 보넛스랑 answer 안겹치는니 확인필요
+        LottoNumber bonusNum = LottoNumber.of(33); // 보넛스랑 answer 안겹치는니 확인필요
         assertThatCode(() -> new WinningLotto(new LottoTicket(1,2,3,4,5,6), bonusNum));
     }
 
@@ -24,7 +24,7 @@ class WinningLottoTest {
     @DisplayName("보너스 번호가 겹친 당첨로또")
     public void InvalidWinningLotto() {
 
-        LottoNumber bonusNum = new LottoNumber(1);
+        LottoNumber bonusNum = LottoNumber.of(1);
         assertThatThrownBy(() -> new WinningLotto(new LottoTicket(1,2,3,4,5,6), bonusNum))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("보너스 숫자 겹침!");
@@ -35,7 +35,7 @@ class WinningLottoTest {
     @MethodSource("provideLottoTicketAndRank")
     public void checkWinningRank(LottoTicket ticket, WinningRank expectedRank) {
         // 당첨 번호: 1, 2, 3, 4, 5, 6 | 보너스: 8
-        WinningLotto winningLotto = new WinningLotto(new LottoTicket(1, 2, 3, 4, 5, 6), new LottoNumber(8));
+        WinningLotto winningLotto = new WinningLotto(new LottoTicket(1, 2, 3, 4, 5, 6), LottoNumber.of(8));
         WinningRank rank = winningLotto.checkRank(ticket);
         assertThat(rank).isEqualTo(expectedRank);
     }

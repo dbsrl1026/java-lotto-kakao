@@ -26,7 +26,7 @@ public class LottoTicket {
         }
 
         return Arrays.stream(numbers)
-                .map(LottoNumber::new) // LottoNumber에 int를 받는 생성자가 있다고 가정
+                .map(LottoNumber::of)
                 .collect(Collectors.toCollection(TreeSet::new));
     }
 
