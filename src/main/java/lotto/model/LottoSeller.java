@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoSeller {
-    public static final Money LOTTO_PRICE = new Money(1000);
+    private static final Money LOTTO_PRICE = new Money(1000);
     private final List<LottoNumber> numberList;
 
     public LottoSeller() {
